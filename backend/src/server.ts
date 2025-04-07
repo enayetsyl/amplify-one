@@ -15,6 +15,13 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.url}`);
+  // console.log('Body:', req.body);
+  next();
+});
+
+
 // Place your other routes here
 app.use("/api/v1", mainRoutes);
 
