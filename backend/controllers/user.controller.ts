@@ -3,8 +3,10 @@ import bcrypt from 'bcryptjs';
 import User from '../model/UserModel';
 import ErrorHandler from '../../../shared/utils/ErrorHandler';
 import { sendResponse } from '../utils/responseHelpers';
+import { sendEmail } from '../utils/email';
+import { verificationEmailTemplate } from '../constants/emailTemplates';
 
-export const registerUser = async (
+export const createAccount = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -49,6 +51,15 @@ export const registerUser = async (
   });
 
   const savedUser = await newUser.save();
+
+  // Send verification email after account creation
+  await sendEmail({
+    to: savedUser.email,
+    subject: 'Verify Your Account',
+    html: verificationEmailTemplate(savedUser.firstName, String(savedUser._id)),
+  });
+
+  console.log('email send')
 
   const userResponse = {
     _id: savedUser._id,

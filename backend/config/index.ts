@@ -16,6 +16,8 @@ export default {
   s3_access_key: process.env.S3_ACCESS_KEY,
   s3_secret_access_key: process.env.S3_SECRET_ACCESS_KEY,
   s3_bucket_name: process.env.S3_BUCKET_NAME,
-  // Uncomment if you add a bcrypt salt rounds value to your .env
-  bcrypt_salt_rounds: process.env.BCRYPT_SALT_ROUNDS
+  bcrypt_salt_rounds: process.env.BCRYPT_SALT_ROUNDS,
+  SMTP_USER:process.env.SMTP_USER,
+  SMTP_PASS: process.env.SMTP_PASS,
+  EMAIL_FROM: process.env.EMAIL_FROM
 };
